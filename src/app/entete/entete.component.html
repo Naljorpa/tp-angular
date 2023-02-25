@@ -1,11 +1,15 @@
-<h1><a routerLink="/"> {{titre}} - {{soustitre}}</a></h1>
-<span class="spacer"></span>
-<nav>
-    <a routerLink="/" routerLinkActive="estActif" [routerLinkActiveOptions]="{exact: true}">Accueil</a>
-    <a routerLink="/produit" routerLinkActive="estActif">Liste des produits</a>
-</nav>
-<span>
-    <p>Connecté : <button (click)="seConnecter()">{{msgConnecter}}</button></p>
-</span>
+<mat-toolbar color="accent">
+    <mat-toolbar-row class="jb">
+        <h1><a routerLink="/"> {{titre}} - {{soustitre}}</a></h1>
+        <nav>
+            <a mat-mini-fab color="primary" routerLink="/" routerLinkActive="estActif"
+                [routerLinkActiveOptions]="{exact: true}"><mat-icon>home</mat-icon></a>
+            <a mat-stroked-button color="primary" routerLink="/produit" routerLinkActive="estActif">Liste des
+                produits</a>
 
-
+        </nav>
+    </mat-toolbar-row>
+    <mat-toolbar-row je>
+        <button mat-button color="primary" (click)="seConnecter()">{{msgConnecter}}</button>
+    </mat-toolbar-row>
+</mat-toolbar>
