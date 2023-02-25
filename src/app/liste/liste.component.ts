@@ -14,6 +14,7 @@ export class ListeComponent implements OnInit{
   produits:Array<IBiere>;
   sontEditable:boolean = false;
   estConnecte:boolean = false;
+  colonnesAffichees:string[] = ["id", "nom", "brasserie", "description"];
 
   constructor(private authServ:AuthService, private bieroServ:BieroService){
     this.produits = [];/*[...Array(5)].map((item, index)=>{

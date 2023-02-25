@@ -1,0 +1,21 @@
+.carte-biere {
+    max-width: 800px;
+    margin-top: calc(2*64px + 24px);
+    margin-left: 40px;
+    
+    .img-content-action{
+        display: flex;
+        flex-direction: row;
+        img {
+            max-width: 250px;
+            margin-left: 16px;
+            margin-bottom: 16px;
+            margin-top: 16px;
+        }
+        .mdc-card__actions{
+            justify-content: flex-end;
+        }
+    }
+
+
+}

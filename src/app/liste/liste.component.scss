@@ -4,6 +4,20 @@
     padding-top: calc(2*64px);
     display: flex;
     flex-direction: column;
+
+    table {
+        width: 100%;
+      }
+      
+      .mat-mdc-form-field {
+        font-size: 14px;
+        width: 100%;
+      }
+      
+      td, th {
+        width: 25%;
+      }
+
     .unProduit{
         margin: 16px;
         
