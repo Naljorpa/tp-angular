@@ -1,0 +1,30 @@
+
+
+
+
+<section class="liste">
+    <h1>Mes produits</h1>
+    <p *ngIf="estConnecte">Sont éditable ? <input type="checkbox" [(ngModel)]="sontEditable"></p>
+    <app-produit [(peutEditer)]="sontEditable"  [produit]="unProduit" *ngFor = "let unProduit of produits"></app-produit>
+
+
+
+    <!--<ng-container *ngFor = "let unProduit of produits">
+        <article *ngIf="!verifEditable(unProduit); else editable" class="unProduit"  >
+            <h2 *ngIf="estEnSolde(unProduit)"class="solde">Solde</h2>
+            <p>Nom : {{unProduit.nom}}</p>
+            <p>Fabricant : {{unProduit.fabricant}}</p>
+            <p>Prix : {{unProduit.prix}} <span *ngIf="unProduit.prix < 15" class="rabais">pas cher</span></p>
+            <p>Prix : {{unProduit.prix}} <span *ngIf="unProduit.rabais" class="rabais">En rabais pour vrai</span></p>
+        </article>
+        <ng-template #editable>
+            <article  class="unProduit" >
+                <p>Nom : <input type="text" [(ngModel)]="unProduit.nom"></p>
+                <p>Fabricant : <input type="text"  [(ngModel)]="unProduit.fabricant"></p>            
+            </article>
+        </ng-template>
+        <p>Est éditable ? <input type="checkbox" [(ngModel)]="unProduit.estEditable"></p>
+    </ng-container>-->
+    
+</section>
+
