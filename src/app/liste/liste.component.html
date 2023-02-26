@@ -2,45 +2,49 @@
     <h1>Mes produits</h1>
     <p *ngIf="estConnecte">Sont éditable ? <input type="checkbox" [(ngModel)]="sontEditable"></p>
 
-    <!-- <app-produit [(peutEditer)]="sontEditable" [produit]="unProduit" *ngFor="let unProduit of produits"></app-produit> -->
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. IPA" #input>
+    </mat-form-field>
 
     <div class="mat-elevation-z8">
-    <mat-table mat-table [dataSource]="produits" matSort>
-        <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
-            <mat-cell *matCellDef="let unProduit"> {{unProduit.id_biere}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="nom">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
-            <mat-cell *matCellDef="let unProduit"> {{unProduit.nom}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="brasserie">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Brasserie </mat-header-cell>
-            <mat-cell *matCellDef="let unProduit"> {{unProduit.brasserie}} </mat-cell>
-        </ng-container>
-        <ng-container matColumnDef="description">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
-            <mat-cell *matCellDef="let unProduit"> {{unProduit.description}} </mat-cell>
-        </ng-container>
+        <mat-table [dataSource]="dataSource" matSort class="unProduit">
 
-        <mat-header-row *matHeaderRowDef="colonnesAffichees"></mat-header-row>
-        <mat-row *matRowDef="let myRowData; columns: colonnesAffichees"></mat-row>
-    </mat-table>
-</div> 
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                <mat-cell *matCellDef="let unProduit"> {{unProduit.id_biere}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="nom">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
+                <mat-cell *matCellDef="let unProduit"> {{unProduit.nom}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="brasserie">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Brasserie </mat-header-cell>
+                <mat-cell *matCellDef="let unProduit"> {{unProduit.brasserie}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Description </mat-header-cell>
+                <mat-cell *matCellDef="let unProduit"> {{unProduit.description}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="date_ajout">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Date d'ajout</mat-header-cell>
+                <mat-cell *matCellDef="let unProduit"> {{unProduit.date_ajout}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="date_modif">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Date de modification</mat-header-cell>
+                <mat-cell *matCellDef="let unProduit"> {{unProduit.date_modif}} </mat-cell>
+            </ng-container>
 
+            <mat-header-row *matHeaderRowDef="colonnesAffichees"></mat-header-row>
+            <mat-row class="cursor" *matRowDef="let unProduit; let myRowData; columns: colonnesAffichees"
+                [routerLink]="['/produit', unProduit.id_biere]"></mat-row>
+        </mat-table>
 
-    <!--   <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-    </mat-form-field>  
-
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-
--->
-
-
-    <!--
-    <app-produit [(peutEditer)]="sontEditable" [produit]="unProduit" *ngFor="let unProduit of produits"></app-produit> -->
-
-
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"
+            [showFirstLastButtons]="true"></mat-paginator>
+    </div>
 </section>
+<!--
+<app-produit [(peutEditer)]="sontEditable" [produits]="produits" [colonnesAffichees]="colonnesAffichees"
+    #produitTable matSort></app-produit> 
+-->

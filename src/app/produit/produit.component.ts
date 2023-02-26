@@ -11,29 +11,36 @@ import { BieroService } from '../biero.service';
   styleUrls: ['./produit.component.scss']
 })
 
-export class ProduitComponent implements OnInit{
+export class ProduitComponent implements OnInit {
+  @Input() produits:Array<IBiere>;
   @Input() produit:IBiere;
   @Output() peutEditerChange = new EventEmitter<boolean>();
   @Input() peutEditer:boolean;
+  @Input() colonnesAffichees: string[];
   estConnecte:boolean = false;
   modifForm:FormGroup;
-
+  
   constructor(private authServ:AuthService, private bieroServ:BieroService){
+    this.produits = [];
+  
     this.authServ.statutConnexion().subscribe((etat)=>{
       this.estConnecte = etat;
       if(etat === false){
         this.peutEditer = false;
       }
-
+      
     })
+   
+    this.colonnesAffichees = ["id", "nom", "brasserie", "description", "date_ajout", "date_modif"];
   }
-
+    
   ngOnInit() :void{
-    this.modifForm = new FormGroup({
-      nom: new FormControl(this.produit.nom, [Validators.required, Validators.minLength(2)]),
-      brasserie : new FormControl(this.produit.brasserie),
-      description : new FormControl(this.produit.description)
-    });
+    // this.modifForm = new FormGroup({
+    //   nom: new FormControl(this.produit.nom, [Validators.required, Validators.minLength(2)]),
+    //   brasserie : new FormControl(this.produit.brasserie),
+    //   description : new FormControl(this.produit.description)
+    // });
+    
   }
 
   changeEditable(){
