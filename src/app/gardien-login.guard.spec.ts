@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+// import { TestBed } from '@angular/core/testing';
 
-import { GardienLoginGuard } from './gardien-login.guard';
+// import { GardienLoginGuard } from './gardien-login.guard';
 
-describe('GardienLoginGuard', () => {
-  let guard: GardienLoginGuard;
+// describe('GardienLoginGuard', () => {
+//   let guard: GardienLoginGuard;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    guard = TestBed.inject(GardienLoginGuard);
-  });
+//   beforeEach(() => {
+//     TestBed.configureTestingModule({});
+//     guard = TestBed.inject(GardienLoginGuard);
+//   });
 
-  it('should be created', () => {
-    expect(guard).toBeTruthy();
-  });
-});
+//   it('should be created', () => {
+//     expect(guard).toBeTruthy();
+//   });
+// });

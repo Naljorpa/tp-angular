@@ -1,6 +1,6 @@
 <mat-toolbar color="accent">
     <mat-toolbar-row class="jb">
-        <h1><a routerLink="/"> {{titre}} - {{soustitre}}</a></h1>
+        <a routerLink="/"><img src="assets/logo.svg" alt=""></a>
         <nav>
             <a mat-mini-fab color="primary" routerLink="/" routerLinkActive="estActif"
                 [routerLinkActiveOptions]="{exact: true}"><mat-icon>home</mat-icon></a>
@@ -9,7 +9,9 @@
 
         </nav>
     </mat-toolbar-row>
-    <mat-toolbar-row je>
+    <!-- 
+        <mat-toolbar-row je>
         <button mat-button color="primary" (click)="seConnecter()">{{msgConnecter}}</button>
     </mat-toolbar-row>
+-->
 </mat-toolbar>

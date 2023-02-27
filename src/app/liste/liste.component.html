@@ -1,14 +1,15 @@
 <section class="liste">
     <h1>Mes produits</h1>
-    <p *ngIf="estConnecte">Sont éditable ? <input type="checkbox" [(ngModel)]="sontEditable"></p>
-
+    <!-- 
+        <p *ngIf="estConnecte">Sont éditable ? <input type="checkbox" [(ngModel)]="sontEditable"></p>
+    -->
     <mat-form-field>
         <mat-label>Filter</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. IPA" #input>
     </mat-form-field>
 
-    <div class="mat-elevation-z8">
-        <mat-table [dataSource]="dataSource" matSort class="unProduit">
+    <div class="mat-elevation-z8 ">
+        <mat-table [dataSource]="dataSource" matSort class="unProduit ">
 
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>

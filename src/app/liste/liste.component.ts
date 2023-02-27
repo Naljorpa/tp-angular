@@ -16,8 +16,8 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class ListeComponent implements AfterViewInit{
   produits:Array<IBiere>;
-  sontEditable:boolean = false;
-  estConnecte:boolean = false;
+  // sontEditable:boolean = false;
+  // estConnecte:boolean = false;
   colonnesAffichees:string[] = ["id", "nom", "brasserie", "description", "date_ajout", "date_modif"];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -39,13 +39,13 @@ export class ListeComponent implements AfterViewInit{
   }
 
   ngOnInit(): void {
-    this.authServ.statutConnexion().subscribe((etat: boolean) => {
-      this.estConnecte = etat;
-      if (this.estConnecte === false) {
-        this.sontEditable = false;
-      }
-    });
-    this.authServ.setNomPage("Liste");
+    // this.authServ.statutConnexion().subscribe((etat: boolean) => {
+    //   this.estConnecte = etat;
+    //   if (this.estConnecte === false) {
+    //     this.sontEditable = false;
+    //   }
+    // });
+    // this.authServ.setNomPage("Liste");
   }
 
   ngAfterViewInit() {
@@ -69,17 +69,17 @@ export class ListeComponent implements AfterViewInit{
       this.sontEditable = false;
     }
   }*/
-  estEnSolde(unProduit:IProduit){
-    return (unProduit.prix < 15 && unProduit.rabais);
-  }
+  // estEnSolde(unProduit:IProduit){
+  //   return (unProduit.prix < 15 && unProduit.rabais);
+  // }
 
-  verifEditable(unProduit:IProduit):boolean{
-    let res:boolean = false;
-    if(this.sontEditable || unProduit.estEditable){
-      res = true;
-    }
-    return res;
-  }
+  // verifEditable(unProduit:IProduit):boolean{
+  //   let res:boolean = false;
+  //   if(this.sontEditable || unProduit.estEditable){
+  //     res = true;
+  //   }
+  //   return res;
+  // }
 
 
 }
