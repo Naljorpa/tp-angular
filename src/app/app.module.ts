@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AccueilComponent } from './accueil/accueil.component';
-import { ProduitComponent } from './produit/produit.component';
 import { EnteteComponent } from './entete/entete.component';
 import { NonTrouveeComponent } from './non-trouvee/non-trouvee.component';
 import { ListeComponent } from './liste/liste.component';
@@ -23,13 +22,13 @@ import { AjouterComponent } from './ajouter/ajouter.component';
 import { ModifierComponent } from './modifier/modifier.component';
 import { EffacerComponent } from './effacer/effacer.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AccueilComponent,
-    ProduitComponent,
     EnteteComponent,
     NonTrouveeComponent,
     ListeComponent,
@@ -54,6 +53,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatSortModule,
     MatInputModule,
     MatDialogModule,
+    MatSnackBarModule
    
   
   ],

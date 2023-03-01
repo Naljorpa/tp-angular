@@ -14,12 +14,10 @@ export class EnteteComponent {
   estConnecte:boolean;
 
   constructor(private authServ:AuthService){
-    console.log(this.authServ)
     this.estConnecte = this.authServ.getConnexion();
     this.authServ.getNomPage().subscribe((nom)=>{
       this.soustitre = nom;
     })
-    console.log(this.soustitre)
   }
 
   seConnecter(){

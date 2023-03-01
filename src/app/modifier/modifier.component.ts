@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EffacerComponent } from '../effacer/effacer.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class ModifierComponent implements OnInit {
   biere: IBiere;
   id: number;
 
-  constructor(private bieroServ: BieroService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, public dialog: MatDialog,) {
+  constructor(private bieroServ: BieroService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, public dialog: MatDialog, private snackBar: MatSnackBar) {
     this.produits = [];
 
   }
@@ -28,7 +29,6 @@ export class ModifierComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.bieroServ.getUneBiere(params['id']).subscribe((biere: any) => {
-        console.log(biere)
         this.biere = biere.data;
         this.modifForm = this.formBuilder.group({
           nom: [this.biere?.nom],
@@ -50,29 +50,27 @@ export class ModifierComponent implements OnInit {
   modifier() {
     let uneBiere: IBiere = this.modifForm.value;
     this.bieroServ.modifierBiere(this.biere.id_biere, uneBiere).subscribe((retour) => {
-      console.log(retour);
       this.biere.nom = uneBiere.nom;
       this.biere.brasserie = uneBiere.brasserie;
       this.biere.description = uneBiere.description;
+      this.openSnackBar('Bière modifiée avec succès', 'Fermer')
       this.router.navigate(['produit']);
     });
 
   }
 
   openDialog() {
-    //id doit etre assigner a un propriete dans ma classe
-    console.log(this.biere?.id_biere);
-
-    // this.id = id;
     const dialogRef = this.dialog.open(EffacerComponent, {
       data: this.biere?.id_biere
     });
     dialogRef.afterClosed().subscribe(() => {
-      
       this.router.navigate(['produit']);
-      // this.bieroServ.getBieres().subscribe((listeBiere) => {
-      //   this.produits = listeBiere.data;
-      // });
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000, // time in milliseconds the snackbar should be displayed
     });
   }
 

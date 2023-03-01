@@ -5,6 +5,7 @@ import { BieroService } from '../biero.service';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { AppRoutingModule } from '../app-routing.module';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ajouter',
@@ -15,7 +16,7 @@ export class AjouterComponent implements OnInit {
   @Input() biere: IBiere;
   biereForm: FormGroup;
   
-  constructor(private bieroServ: BieroService, private formBuilder: FormBuilder,  private router: Router) {
+  constructor(private bieroServ: BieroService, private formBuilder: FormBuilder,  private router: Router, private snackBar: MatSnackBar) {
      
   }
 
@@ -38,11 +39,16 @@ export class AjouterComponent implements OnInit {
   ajouter() {
     let uneBiere: IBiere = this.biereForm.value;
     this.bieroServ.ajouterBiere(uneBiere).subscribe((retour) => {
-      console.log(retour);
+      this.openSnackBar('Bière ajoutée avec succèes', 'Fermer')
       this.router.navigate(['produit']);
     });
     
   }
 
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 3000, // time in milliseconds the snackbar should be displayed
+    });
+  }
 
 }
