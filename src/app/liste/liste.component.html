@@ -14,7 +14,7 @@
         <mat-table [dataSource]="dataSource" matSort class="unProduit ">
             <ng-container matColumnDef="nom">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Nom </mat-header-cell>
-                <mat-cell *matCellDef="let unProduit" [routerLink]="['/produit', unProduit.id_biere]"> {{unProduit.nom}} </mat-cell>
+                <mat-cell *matCellDef="let unProduit"> {{unProduit.nom}} </mat-cell>
             </ng-container>
             <ng-container matColumnDef="brasserie">
                 <mat-header-cell *matHeaderCellDef mat-sort-header> Brasserie </mat-header-cell>

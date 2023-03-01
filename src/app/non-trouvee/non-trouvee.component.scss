@@ -1,5 +1,29 @@
-:host{
-    h1{
-        margin-top: calc(2*68px);
+:host {
+
+    .notFound {
+        background-image: url(/assets/beer-background4.jpeg);
+        background-size: cover;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            margin: 0;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 0;
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .container {
+            background-color: rgb(255, 255, 255, 0.85);
+            padding: 10px;
+            flex-direction: column;
+        }
     }
+
 }
