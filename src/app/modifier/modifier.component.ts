@@ -31,9 +31,9 @@ export class ModifierComponent implements OnInit {
       this.bieroServ.getUneBiere(params['id']).subscribe((biere: any) => {
         this.biere = biere.data;
         this.modifForm = this.formBuilder.group({
-          nom: [this.biere?.nom],
-          description: [this.biere?.description],
-          brasserie: [this.biere?.brasserie]
+          nom: [this.biere?.nom ,[Validators.required, Validators.minLength(2)]],
+          description: [this.biere?.description, [Validators.required, Validators.minLength(2)]],
+          brasserie: [this.biere?.brasserie, [Validators.required, Validators.minLength(2)]]
         });
       })
     })

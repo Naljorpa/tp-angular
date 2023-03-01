@@ -26,7 +26,6 @@ export class AjouterComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(2)]],
       brasserie: ['', [Validators.required, Validators.minLength(2)]]
     });
-  
   }
 
   annuler() {
@@ -37,6 +36,7 @@ export class AjouterComponent implements OnInit {
   }
 
   ajouter() {
+    console.log(this.biereForm.errors);
     let uneBiere: IBiere = this.biereForm.value;
     this.bieroServ.ajouterBiere(uneBiere).subscribe((retour) => {
       this.openSnackBar('Bière ajoutée avec succèes', 'Fermer')
