@@ -12,8 +12,8 @@
         position: fixed;
         display: flex;
         z-index: 999;
-        padding-top: 40px;
-        padding-bottom: 40px;
+        padding-top: 10px;
+        padding-bottom: 30px;
 
         @media screen and (max-width: 550px) {
             flex-direction: column-reverse;
@@ -54,7 +54,7 @@
                 display: block;
                 background-size:cover;
                 width: 200px;
-                height: 80px;
+                
             }
         }
 

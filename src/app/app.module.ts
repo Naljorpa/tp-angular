@@ -21,6 +21,11 @@ import {MatFormFieldModule } from '@angular/material/form-field';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatInputModule} from '@angular/material/input';
+import { AjouterComponent } from './ajouter/ajouter.component';
+import { ModifierComponent } from './modifier/modifier.component';
+import { EffacerComponent } from './effacer/effacer.component';
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -31,6 +36,9 @@ import {MatInputModule} from '@angular/material/input';
     EnteteComponent,
     NonTrouveeComponent,
     ListeComponent,
+    AjouterComponent,
+    ModifierComponent,
+    EffacerComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,7 +55,10 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule,
+   
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

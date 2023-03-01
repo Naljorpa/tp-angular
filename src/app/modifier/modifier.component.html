@@ -1,0 +1,22 @@
+
+<form *ngIf="modifForm" [formGroup]="modifForm">
+    <h2>Modifier une bière</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Nom: </mat-label>
+        <input matInput formControlName="nom" [value]="biere?.nom">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Description : </mat-label>
+        <textarea  matInput formControlName="description" [value]="biere?.description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Brasserie : </mat-label>
+        <input matInput formControlName="brasserie" [value]="biere?.brasserie">
+    </mat-form-field>
+    <div class="btn-modif">
+        <button mat-raised-button color="primary" (click)="modifier()">Modifier</button>
+        <button mat-raised-button color="warn" (click)="annuler()">Annuler</button>
+    </div>
+</form>

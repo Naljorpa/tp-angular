@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { BieroService } from '../biero.service';
 import { IBiere } from '../ibiere';
@@ -6,7 +6,9 @@ import { IListeBiere } from '../iliste-biere';
 import { IProduit } from '../iproduit';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { EffacerComponent } from '../effacer/effacer.component';
 
 
 @Component({
@@ -14,19 +16,24 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './liste.component.html',
   styleUrls: ['./liste.component.scss']
 })
-export class ListeComponent implements AfterViewInit{
-  produits:Array<IBiere>;
+export class ListeComponent implements OnInit {
+  produits: Array<IBiere>;
   // sontEditable:boolean = false;
   // estConnecte:boolean = false;
-  colonnesAffichees:string[] = ["id", "nom", "brasserie", "description", "date_ajout", "date_modif"];
+  colonnesAffichees: string[] = ["nom", "brasserie", "description", "date_ajout", "date_modif", "action"];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  id: number;
+
+  // dialogRef: MatDialogRef<EffacerComponent>;
+
+
   dataSource: MatTableDataSource<IBiere>;
 
 
-  constructor(private authServ:AuthService, private bieroServ:BieroService){
-    this.dataSource = new MatTableDataSource<IBiere>();
+  constructor(private authServ: AuthService, private bieroServ: BieroService, public dialog: MatDialog,) {
     this.produits = [];
+
     // this.authServ.statutConnexion().subscribe((etat:boolean)=>{
     //   this.estConnecte = etat;
     //   if(this.estConnecte === false){
@@ -34,11 +41,22 @@ export class ListeComponent implements AfterViewInit{
     //   }
     // })
     // this.authServ.setNomPage("Liste");
-  
-    this.dataSource = new MatTableDataSource<IBiere>(this.produits); 
+
+    // Crée une nouvelle instance de MatTableDatasouce et l'initialise avec les données de this.produits
+    this.dataSource = new MatTableDataSource<IBiere>(this.produits);
   }
 
+
+  /**
+   * Génère la liste des bières et l'assigne à this.produits et à dataSource. Nourrit ensuite le sorting et le paginator.
+   */
   ngOnInit(): void {
+    this.bieroServ.getBieres().subscribe((listeBiere) => {
+      this.produits = listeBiere.data;
+      this.dataSource.data = this.produits;
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
     // this.authServ.statutConnexion().subscribe((etat: boolean) => {
     //   this.estConnecte = etat;
     //   if (this.estConnecte === false) {
@@ -48,20 +66,39 @@ export class ListeComponent implements AfterViewInit{
     // this.authServ.setNomPage("Liste");
   }
 
-  ngAfterViewInit() {
-    this.bieroServ.getBieres().subscribe((listeBiere) => {
-      this.produits = listeBiere.data;
-      this.dataSource.data = this.produits;
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-    });
+  /**
+   * Après que la vue a été initialisé, génère la liste des bières et l'assigne à this.produits et à dataSource. Nourrit ensuite le sorting et le paginator.
+   */
+  // ngAfterViewInit() {
 
-    
-  }
+  // }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+  openDialog(id: number) {
+    //id doit etre assigner a un propriete dans ma classe
+    console.log(id);
+
+    this.id = id;
+    const dialogRef = this.dialog.open(EffacerComponent, {
+      data: this.id
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      // Refresh the page data after the dialog is closed
+      this.bieroServ.getBieres().subscribe((listeBiere) => {
+        this.produits = listeBiere.data;
+        this.dataSource.data = this.produits;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
+    });
+  }
+
+
+
 
   /*verifConnexion(){
     //console.log(this.authServ.etatConnexion)

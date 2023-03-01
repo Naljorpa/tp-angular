@@ -7,28 +7,48 @@
   display: flex;
   flex-direction: column;
 
+  .btn-ajouter{
+    margin-bottom: 16px;
+  }
+
   mat-cell {
     align-items: flex-start;
     padding-top: 16px;
     padding-bottom: 16px;
   }
 
-  mat-cell:not(:nth-child(4)),
-  mat-header-cell:not(:nth-child(4)),
-  mat-footer-cell:not(:nth-child(4)) {
+  mat-cell:first-of-type{
+      cursor: pointer;
+  }
+
+  .boutons{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    button:not(:first-of-type){
+      width: 100px;
+    }
+  }
+  
+  mat-cell:not(:nth-child(3)),
+  mat-header-cell:not(:nth-child(3)),
+  mat-footer-cell:not(:nth-child(3)) {
     flex: 1;
   }
 
-  mat-cell:nth-child(4),
-  mat-header-cell:nth-child(4),
-  mat-footer-cell:nth-child(4) {
-    flex: 5;
+  mat-cell:nth-child(3),
+  mat-header-cell:nth-child(3),
+  mat-footer-cell:nth-child(3) {
+    flex: 4;
   }
 
-  .cursor {
-    cursor: pointer;
+  mat-cell:nth-child(6),
+  mat-header-cell:nth-child(6),
+  mat-footer-cell:nth-child(6) {
+    flex: 2;
   }
 
+ 
   @media screen and (max-width: 600px) {
 
     padding-top: 250px;
@@ -46,13 +66,6 @@
       display: none;
     }
 
-
-    mat-cell:nth-child(6),
-    mat-header-cell:nth-child(6),
-    mat-footer-cell:nth-child(6) {
-      display: none;
-    }
-
     mat-cell:nth-child(1),
     mat-header-cell:nth-child(1),
     mat-footer-cell:nth-child(1) {
@@ -62,13 +75,13 @@
     mat-cell:nth-child(2),
     mat-header-cell:nth-child(2),
     mat-footer-cell:nth-child(2) {
-      flex: 2;
+      flex: 1;
     }
 
     mat-cell:nth-child(3),
     mat-header-cell:nth-child(3),
     mat-footer-cell:nth-child(3) {
-      flex: 2;
+      display: none;
     }
   }
 

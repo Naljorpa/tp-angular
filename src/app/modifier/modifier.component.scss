@@ -1,0 +1,25 @@
+:host {
+    form {
+
+        padding: 100px 16px 0px 16px;
+    }
+
+    .btn-modif{
+        display: flex;
+        gap: 16px;
+    }
+
+    mat-form-field {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+    }
+
+    @media screen and (max-width: 600px) {
+        form {
+            padding-top: 200px;
+        }
+
+    }
+}

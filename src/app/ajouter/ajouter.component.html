@@ -1,0 +1,20 @@
+
+<form [formGroup]="biereForm" (ngSubmit)="ajouter()">
+    <h2>Ajouter une bière</h2>
+    <mat-form-field appearance="fill">
+        <mat-label>Nom: </mat-label>
+        <input matInput formControlName="nom">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Description : </mat-label>
+        <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Brasserie : </mat-label>
+        <input matInput formControlName="brasserie">
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!biereForm.dirty || !biereForm.valid">Ajouter</button>
+
+</form>
