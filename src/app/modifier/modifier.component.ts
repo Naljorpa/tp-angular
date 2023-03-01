@@ -4,6 +4,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { BieroService } from '../biero.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EffacerComponent } from '../effacer/effacer.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -16,8 +18,9 @@ export class ModifierComponent implements OnInit {
   @Input() produit: IBiere;
   modifForm: FormGroup;
   biere: IBiere;
+  id: number;
 
-  constructor(private bieroServ: BieroService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router) {
+  constructor(private bieroServ: BieroService, private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, public dialog: MatDialog,) {
     this.produits = [];
 
   }
@@ -54,6 +57,23 @@ export class ModifierComponent implements OnInit {
       this.router.navigate(['produit']);
     });
 
+  }
+
+  openDialog() {
+    //id doit etre assigner a un propriete dans ma classe
+    console.log(this.biere?.id_biere);
+
+    // this.id = id;
+    const dialogRef = this.dialog.open(EffacerComponent, {
+      data: this.biere?.id_biere
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      
+      this.router.navigate(['produit']);
+      // this.bieroServ.getBieres().subscribe((listeBiere) => {
+      //   this.produits = listeBiere.data;
+      // });
+    });
   }
 
 }
