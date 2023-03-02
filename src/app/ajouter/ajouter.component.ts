@@ -1,9 +1,7 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IBiere } from '../ibiere';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BieroService } from '../biero.service';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import { AppRoutingModule } from '../app-routing.module';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -15,11 +13,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AjouterComponent implements OnInit {
   @Input() biere: IBiere;
   biereForm: FormGroup;
-  
-  constructor(private bieroServ: BieroService, private formBuilder: FormBuilder,  private router: Router, private snackBar: MatSnackBar) {
-     
+
+  constructor(private bieroServ: BieroService, private formBuilder: FormBuilder, private router: Router, private snackBar: MatSnackBar) {
   }
 
+  /**
+ * Cette fonction est exécutée lors de la création du composant.
+ * Elle initialise un objet FormGroup avec des validateurs pour chaque champ du formulaire.
+ */
   ngOnInit(): void {
     this.biereForm = this.formBuilder.group({
       nom: ['', [Validators.required, Validators.minLength(2)]],
@@ -28,6 +29,10 @@ export class AjouterComponent implements OnInit {
     });
   }
 
+  /**
+ * Cette fonction est appelée lors de l'annulation de l'ajout d'une bière.
+ * Elle réinitialise les champs du formulaire avec les valeurs de l'objet biere.
+ */
   annuler() {
     console.log(this.biereForm);
     this.biereForm.controls["nom"].setValue(this.biere.nom);
@@ -35,6 +40,11 @@ export class AjouterComponent implements OnInit {
     this.biereForm.controls["description"].setValue(this.biere.description);
   }
 
+  /**
+ * Cette fonction est appelée lors de l'ajout d'une bière.
+ * Elle récupère les valeurs du formulaire et ajoute la bière via un appel à un service.
+ * Si l'ajout est réussi, elle affiche un message de confirmation et redirige l'utilisateur vers la liste des produits.
+ */
   ajouter() {
     console.log(this.biereForm.errors);
     let uneBiere: IBiere = this.biereForm.value;
@@ -42,12 +52,17 @@ export class AjouterComponent implements OnInit {
       this.openSnackBar('Bière ajoutée avec succèes', 'Fermer')
       this.router.navigate(['produit']);
     });
-    
+
   }
 
+  /**
+ * Cette fonction affiche un message de type snackbar.
+ * @param message Le message à afficher.
+ * @param action L'action à afficher sur le bouton de fermeture du snackbar.
+ */
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 3000, // time in milliseconds the snackbar should be displayed
+      duration: 3000, 
     });
   }
 

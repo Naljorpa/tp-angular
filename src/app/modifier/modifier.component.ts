@@ -1,11 +1,10 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IBiere } from '../ibiere';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { BieroService } from '../biero.service';
-import { MatFormFieldModule } from '@angular/material/form-field';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EffacerComponent } from '../effacer/effacer.component';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 
@@ -26,20 +25,27 @@ export class ModifierComponent implements OnInit {
 
   }
 
+  /**
+ * Initialise le formulaire de modification de la bière avec les données de la bière sélectionnée.
+ * Les données sont récupérées à partir de l'ID de la bière dans l'URL.
+ */
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.bieroServ.getUneBiere(params['id']).subscribe((biere: any) => {
         this.biere = biere.data;
         this.modifForm = this.formBuilder.group({
-          nom: [this.biere?.nom ,[Validators.required, Validators.minLength(2)]],
+          nom: [this.biere?.nom, [Validators.required, Validators.minLength(2)]],
           description: [this.biere?.description, [Validators.required, Validators.minLength(2)]],
           brasserie: [this.biere?.brasserie, [Validators.required, Validators.minLength(2)]]
         });
       })
     })
-    
+
   }
 
+  /**
+ * Remet le formulaire de modification à l'état initial avec les données de la bière actuelle.
+ */
   annuler() {
     console.log(this.modifForm);
     this.modifForm.controls["nom"].setValue(this.biere.nom);
@@ -47,6 +53,10 @@ export class ModifierComponent implements OnInit {
     this.modifForm.controls["description"].setValue(this.biere.description);
   }
 
+  /**
+ * Modifie la bière avec les nouvelles données entrées dans le formulaire.
+ * Les données sont envoyées au serveur via le service de bières.
+ */
   modifier() {
     let uneBiere: IBiere = this.modifForm.value;
     this.bieroServ.modifierBiere(this.biere.id_biere, uneBiere).subscribe((retour) => {
@@ -59,6 +69,10 @@ export class ModifierComponent implements OnInit {
 
   }
 
+  /**
+ * Ouvre une boîte de dialogue pour confirmer la suppression de la bière actuelle.
+ * Les données sont envoyées à la boîte de dialogue via l'ID de la bière actuelle.
+ */
   openDialog() {
     const dialogRef = this.dialog.open(EffacerComponent, {
       data: this.biere?.id_biere
@@ -68,9 +82,13 @@ export class ModifierComponent implements OnInit {
     });
   }
 
+  /**
+ * Affiche un message de succès dans un snackbar.
+ * Le message est affiché pendant 3 secondes.
+ */
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 3000, // time in milliseconds the snackbar should be displayed
+      duration: 3000
     });
   }
 
